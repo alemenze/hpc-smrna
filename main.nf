@@ -43,7 +43,7 @@ if (params.samplesheet) {file(params.samplesheet, checkIfExists: true)} else { e
 Channel
     .fromPath(params.samplesheet)
     .splitCsv(header:true)
-    .map{ row -> tuple(row.sample_id, file(row.fastq_r1),file(row.fastq_r2)) }
+    .map{ row -> tuple(row.sample_id, file(row.fastq_r1)) }
     .set { reads }
 
 // Check optional parameters
@@ -78,7 +78,7 @@ include { Mirdeep2 } from './modules/subworkflows/mirdeep2'
 workflow {
 
     reads
-        .map { it[1], it[2] }
+        .map { it[1] }
         .flatten()
         .set { full_reads }
 

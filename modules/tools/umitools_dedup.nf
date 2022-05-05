@@ -29,6 +29,5 @@ process Umitools_dedup {
             -I $bam \\
             -S ${meta}.bam \\
             --output-stats ${meta} \\
-            --paired \\
         """
 }

@@ -13,7 +13,7 @@ process Umi_extract {
     container "quay.io/biocontainers/umi_tools:1.1.2--py38h4a8c8d9_0"
 
     input:
-        tuple val(meta), path(r1), path(r2)
+        tuple val(meta), path(r1)
 
     output:
         tuple val(meta), path("*.fastq.gz"), emit: reads
@@ -21,8 +21,8 @@ process Umi_extract {
 
     script:
         """
-            umi_tools extract -I $r1 --read2-in=$r2 \\
-                -S ${meta}.umi_1.fastq.gz --read2-out=${meta}.umi_2.fastq.gz \\
+            umi_tools extract -I $r1 \\
+                -S ${meta}.umi_1.fastq.gz \\
                 --extract-method=${params.umitools_extract_method} --bc-pattern='${params.umitools_bc_pattern}' > ${meta}.umi_extract.log
         """
 }

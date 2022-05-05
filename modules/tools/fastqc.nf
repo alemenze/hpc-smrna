@@ -13,7 +13,7 @@ process Fastqc {
     container "quay.io/biocontainers/fastqc:0.11.9--0"
 
     input:
-        tuple val(meta), path(r1), path(r2)
+        tuple val(meta), path(r1)
 
     output:
         tuple val(meta), path("*.html"), emit: html
@@ -21,6 +21,6 @@ process Fastqc {
 
     script:
         """
-            fastqc --quiet --threads $task.cpus $r1 $r2
+            fastqc --quiet --threads $task.cpus $r1
         """
 }

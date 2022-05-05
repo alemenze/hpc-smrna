@@ -23,7 +23,6 @@ process trimgalore {
         trim_galore \\
             --cores ${task.cpus} \\
             --fastqc \\
-            --paired \\
             --gzip \\
             --max_length ${params.max_length} --length ${params.min_length}
             $reads

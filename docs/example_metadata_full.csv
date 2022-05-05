@@ -1,2 +1,2 @@
-sample_id,fastq_r1,fastq_r2
-Sample1,/path/to/Sample1_R1.fastq.gz,/path/to/Sample1_R2.fastq.gz
+sample_id,fastq_r1
+Sample1,/path/to/Sample1_R1.fastq.gz
