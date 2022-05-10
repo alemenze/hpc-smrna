@@ -1,5 +1,5 @@
 include { Index_genome } from '../tools/bowtie_genome'
-include { Bowtie_map_seq as Bowtie_map_genome } from '../tools/bowtie_map_mirna'
+include { Bowtie_mirna_seq as Bowtie_map_genome } from '../tools/bowtie_map_mirna'
 include { Bam_work as Bam_work_genome } from './bam_work'
 
 workflow Genome_quant {
