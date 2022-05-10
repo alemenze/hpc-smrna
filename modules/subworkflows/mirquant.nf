@@ -6,9 +6,9 @@ include { Format_fasta_mirna as Format_mature
 
 include { Index_mirna as Index_mature
             Index_mirna as Index_hairpin } from '../tools/bowtie_mirna'
-include { Bowtie_map_seq as Bowtie_map_mature
-            Bowtie_map_seq as Bowtie_map_hairpin
-            Bowtie_map_seq as Bowtie_map_seqcluster } from '../tools/bowtie_map_mirna'
+include { Bowtie_mirna_seq as Bowtie_map_mature
+            Bowtie_mirna_seq as Bowtie_map_hairpin
+            Bowtie_mirna_seq as Bowtie_mirna_seqcluster } from '../tools/bowtie_map_mirna'
 
 include { Bam_work as Bam_work_mature
             Bam_work as Bam_work_hairpin
@@ -41,13 +41,13 @@ workflow Quant {
             .map { add_suffix(it, "mature") }
             .set { reads_mirna }
 
-        Bowtime_map_mature (
+        Bowtie_map_mature (
             reads_mirna,
             mature_bowtie.collect(),
             "Mature_miRNA"
         )
 
-        Bowtime_map_mature.out.unmapped
+        Bowtie_map_mature.out.unmapped
             .map { add_suffix(it, "hairpin") }
             .set { reads_hairpin }
 
@@ -59,13 +59,13 @@ workflow Quant {
 
         Bam_work_mature (
             Bowtie_map_mature.out.bam, 
-            Format_mature.out.formatted.fasta,
+            Format_mature.out.formatted_fasta,
             "Mature"
         )
 
         Bam_work_hairpin (
             Bowtie_map_hairpin.out.bam, 
-            Format_hairpin.out.formatted.fasta,
+            Format_hairpin.out.formatted_fasta,
             "Hairpin"
         )
 
@@ -74,8 +74,14 @@ workflow Quant {
             .set { reads_seqcluster }
         
         Seqcluster_sequences ( reads_seqcluster ).collapsed.set {reads_collapsed}
-        Bowtie_map_seqcluster ( reads_collapsed, hairpin_bowtie.collect() )
-        Mirtop_quant ( Bowtie_map_seqcluster.out.bam.collect{it[1]}, Format_hairpin.out.formatted_fasta, gtf )
+        Bowtie_mirna_seqcluster ( 
+            reads_collapsed, 
+            hairpin_bowtie.collect(), 
+            'Seqcluster')
+        Mirtop_quant ( 
+            Bowtie_mirna_seqcluster.out.bam.collect{it[1]}, 
+            Format_hairpin.out.formatted_fasta, 
+            gtf )
 
         Bowtie_map_hairpin.out.unmapped
             .map { add_suffix(it, "genome") }
@@ -84,7 +90,7 @@ workflow Quant {
     emit:
         fasta_mature = Format_mature.out.formatted_fasta
         fasta_hairpin = Format_hairpin.out.formatted_fasta
-        umapped = reads_genome
+        unmapped = reads_genome
 
 }
 def add_suffix(row, suffix) {

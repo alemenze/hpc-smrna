@@ -19,7 +19,7 @@ workflow Genome_quant {
         }
 
         if (bt_indices){
-            Bowtime_map_genome (
+            Bowtie_map_genome (
                 reads,
                 bt_indices.collect(),
                 "Genome"
@@ -33,6 +33,6 @@ workflow Genome_quant {
 
 
     emit:
-        fasta = fasta.formatted
+        fasta = fasta_formatted
         indices = bt_indices
 }

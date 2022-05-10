@@ -17,13 +17,29 @@ def helpMessage(){
     Usage:
 
         nextflow run alemenze/hpc-smrna \
-
-
+            --samplesheet './example_samplesheet.csv'
+            --genome GRCh37
+            --mirtrace_species 'hsa'
 
     Mandatory:
         -profile                    Currently available for docker (local) singularity (HPC local), slurm (HPC multi node)
+        --samplesheet               Path to an appropriate sample sheet listing the sample IDs and single read R1
+        --genome                    Current genome to use. If you do not use iGenomes, then you have to provide the other genome files
+        --mirtrace_species          What species from mirtrace should you use. Generally 'hsa' for human
+
     Optional:   
         --outdir                    Directory for output directories/files. Defaults to './results' 
+        --three_prime_adapter       The 3' adapter to trim. Defaults to "TGGAATTCTCGGGTGCCAAGG"
+        --umitools_extract_method   Method for UMITools to extract UMIs. Defaults to "string"
+        --umitools_bc_pattern       For any custom barcode pattern. Defaults to "NNNNNN"
+        --min_length                Minimum length to trim. Defaults to 17 for smRNA
+        --max_length                Maximum length to trim. Defaults to 40 for smRNA
+        --fasta                     If there is no iGenomes to use, specify a fasta file
+        --mirna_gtf                 If there is no iGenomes to use, specify a gtf file for the miRNA
+        --bt_indices                If there is no iGenomes to use, specify a bowtie index to use
+        --mirtrace_protocol         Which mitrace protocol to use. Defaults to "illumina"
+        --mature                    Mature miRNA database. Defaults to "https://mirbase.org/ftp/CURRENT/mature.fa.gz"
+        --hairpin                   Hairpin miRNA database. Defaults to "https://mirbase.org/ftp/CURRENT/hairpin.fa.gz"
 
     Slurm Controller:
         --node_partition            Specify the node partition in use for slurm executor. Defaults to 'main' 

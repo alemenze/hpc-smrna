@@ -1,5 +1,6 @@
 include { Fastqc } from '../tools/fastqc'
 include { Umi_extract } from '../tools/umitools'
+include { Trimgalore } from '../tools/trimgalore'
 
 workflow Qc_trim {
     take:

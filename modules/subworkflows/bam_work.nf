@@ -3,7 +3,7 @@ include { Samtools_sort
 include { Samtools_index 
             Samtools_index as Samtools_dup_index } from '../tools/samtools_index'
 include { Umitools_dedup } from '../tools/umitools_dedup'
-include { Bam_stats_samtools } from '../tools/samtools_stats'
+include { Samtools_stats  } from '../tools/samtools_stats'
 
 workflow Bam_work {
     take:
@@ -63,7 +63,7 @@ workflow Bam_work {
             }
             .set { dedup_bam_bai }
 
-        Bam_stats_samtools (
+        Samtools_stats  (
             dedup_bam_bai, 
             fasta,
             type

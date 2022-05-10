@@ -1,4 +1,4 @@
-process trimgalore {
+process Trimgalore {
     tag "${meta}"
     label 'process_medium'
 

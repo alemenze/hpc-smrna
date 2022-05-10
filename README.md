@@ -14,5 +14,5 @@ Gots to make that metadata. Check the example!
 
 ## Example commands
 ```bash
-nohup ~/nextflow -bg run alemenze/hpc-smrna -r main --samplesheet ./metadata_example.csv -profile slurm --genome GRCh38 > example_log.txt
+nohup ~/nextflow -bg run alemenze/hpc-smrna -r main --samplesheet ./metadata_example.csv -profile slurm --genome GRCh37 --mirtrace_species 'hsa' > example_log.txt
 ```

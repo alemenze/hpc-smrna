@@ -13,6 +13,7 @@ process Samtools_index {
 
     input:
         tuple val(meta), path(input)
+        val(type)
 
     output:
         tuple val(meta), path("*.bai") , optional:true, emit: bai
