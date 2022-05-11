@@ -24,7 +24,7 @@ process Trimgalore {
             --cores ${task.cpus} \\
             --fastqc \\
             --gzip \\
-            --max_length ${params.max_length} --length ${params.min_length}
+            --max_length ${params.max_length} --length ${params.min_length} \\
             $reads
         """
 }

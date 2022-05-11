@@ -24,7 +24,7 @@ process Samtools_index {
         """
         samtools \\
             index \\
-            -@ ${task.cpus-1} \\ \\
+            -@ ${task.cpus} \\
             $input
         """
 }

@@ -95,7 +95,7 @@ workflow Quant {
 }
 def add_suffix(row, suffix) {
     def meta = [:]
-    meta.id           = "${row[0].id}_${suffix}"
+    meta           = "${row[0]}_${suffix}"
     def array = []
     array = [ meta, row[1] ]
     return array
