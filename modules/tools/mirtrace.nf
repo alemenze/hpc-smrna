@@ -21,13 +21,13 @@ process Mirtrace {
     script:
         def three_prime_adapter = params.three_prime_adapter
         // Presets
-        if (params.protocol == "illumina"){
+        if (params.mirtrace_protocol == "illumina"){
             three_prime_adapter = "TGGAATTCTCGGGTGCCAAGG"
-        } else if (params.protocol == "nextflex"){
+        } else if (params.mirtrace_protocol == "nextflex"){
             three_prime_adapter = "TGGAATTCTCGGGTGCCAAGG"
-        } else if (params.protocol == "qiaseq"){
+        } else if (params.mirtrace_protocol == "qiaseq"){
             three_prime_adapter = "AACTGTAGGCACCATCAAT"
-        } else if (params.protocol == "cats"){
+        } else if (params.mirtrace_protocol == "cats"){
             three_prime_adapter = "AAAAAAAA"
         }
         if (params.three_prime_adapter){
